@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: database
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=database
+      - POSTGRES_PASSWORD=asdasd123
+      - POSTGRES_DB=crm
