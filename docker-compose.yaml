@@ -3,8 +3,12 @@ version: "3.8"
 services:
   database:
     container_name: database
-    image: postgres:15-alpine
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
     environment:
-      - POSTGRES_USER=database
-      - POSTGRES_PASSWORD=asdasd123
-      - POSTGRES_DB=crm
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=asdasd123
