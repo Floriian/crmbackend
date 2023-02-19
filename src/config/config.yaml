@@ -1,0 +1,3 @@
+auth:
+  secret: 'ghfklsdfkjsdfklasjdfkléasdfhu4iwezh23rj'
+  expiresIn: '8h'
