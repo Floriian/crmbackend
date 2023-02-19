@@ -12,3 +12,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=asdasd123
+      - MONGO_INITDB_DATABASE=crm
+    volumes:
+      - ./mongoinit.js:/docker-entrypoint-initdb.d/mongoinit.js:ro
+      - ./mongo:/data/db
