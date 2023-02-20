@@ -14,7 +14,7 @@ import configYaml from './config/configuration';
       load: [configYaml],
     }),
     MongooseModule.forRoot(
-      'mongodb://127.0.0.1:27017/crm?readPreference=primary&ssl=false&directConnection=true',
+      'mongodb://crmuser:crmpassword@127.0.0.1:27017/crm?readPreference=primary&ssl=false&directConnection=true',
     ),
     TasksModule,
     AuthModule,
