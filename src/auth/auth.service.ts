@@ -12,6 +12,7 @@ import { Model } from 'mongoose';
 import * as argon2 from 'argon2';
 import { SignInDto, SignUpDto } from './dto';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from '../user/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -48,6 +49,7 @@ export class AuthService {
         username: signUpDto.username,
         email: signUpDto.email,
         password: hashPassword,
+        role: [Role.USER],
       });
 
       await user.save();
@@ -111,7 +113,6 @@ export class AuthService {
       username,
       email,
     };
-    console.log(payload);
     const token = await this.jwt.signAsync(payload, {
       secret,
       expiresIn,
