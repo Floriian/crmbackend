@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
+import { JwtGuard } from '../auth/guard';
 
 @Injectable()
+@UseGuards(JwtGuard)
 export class UserService {
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }
 
-  findAll() {
-    return `This action returns all user`;
+  findUser(user: User) {
+    console.log(user);
   }
 
   findOne(id: number) {
