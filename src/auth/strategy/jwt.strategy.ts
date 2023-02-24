@@ -19,17 +19,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'JWT') {
 
   async validate(payload: { sub: string; username: string; email: string }) {
     const user = await this.userModel.findOne({
-      $or: [
-        {
-          username: payload.username,
-        },
-        {
-          email: payload.email,
-        },
-      ],
+      id: payload.sub,
     });
     const userDeepClone: User = JSON.parse(JSON.stringify(user));
     delete userDeepClone.password;
-    return user;
+    return userDeepClone;
   }
 }

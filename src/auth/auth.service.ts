@@ -52,8 +52,8 @@ export class AuthService {
 
       await user.save();
 
-      const userClone: User = JSON.parse(JSON.stringify(user));
-      delete userClone.password;
+      // const userClone: User = JSON.parse(JSON.stringify(user));
+      // delete userClone.password;
 
       return this.signToken(user.id, user.username, user.email);
     } catch (e) {
@@ -77,8 +77,9 @@ export class AuthService {
     const hashPassword = await argon2.verify(user.password, signInDto.password);
     if (!hashPassword) throw new UnauthorizedException('Incorrect password.');
 
-    const userClone: User = JSON.parse(JSON.stringify(user));
-    delete userClone.password;
+    // const userClone: User = JSON.parse(JSON.stringify(user));
+    // delete userClone.password;
+
     return this.signToken(user.id, user.username, user.email);
   }
 
@@ -110,6 +111,7 @@ export class AuthService {
       username,
       email,
     };
+    console.log(payload);
     const token = await this.jwt.signAsync(payload, {
       secret,
       expiresIn,
