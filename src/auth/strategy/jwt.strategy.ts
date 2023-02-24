@@ -21,8 +21,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'JWT') {
     const user = await this.userModel.findOne({
       id: payload.sub,
     });
-    const userDeepClone: User = JSON.parse(JSON.stringify(user));
-    delete userDeepClone.password;
-    return userDeepClone;
+
+    if (user) {
+      const userDeepClone: User = JSON.parse(JSON.stringify(user));
+      delete userDeepClone.password;
+      return userDeepClone;
+    }
   }
 }
