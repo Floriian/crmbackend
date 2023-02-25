@@ -1,0 +1,4 @@
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2Y4ZWZlNWM4YmUzOWI1YTJkYzkzMjIiLCJ1c2VybmFtZSI6IkZsb3JpaWFuIiwiZW1haWwiOiJhc2Rhc2RAZ21haWwuY29tIiwiaWF0IjoxNjc3MjU4NzI1LCJleHAiOjE2NzcyODc1MjV9.j4f7wtSakdXxZcAC0ME3GgBr2n_3YxBDZ1Iu-7T615w
+
+GET http://localhost:3000/user
+Authorization: {{token}}

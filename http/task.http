@@ -1,0 +1,24 @@
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2Y4ZjUzZmQ3OGY1NjYwZGIwNzJiM2YiLCJ1c2VybmFtZSI6IkZsb3JpaWFuIiwiZW1haWwiOiJhc2Rhc2QxMjNAZ21haWwuY29tIiwicm9sZSI6WyJ1c2VyIl0sImlhdCI6MTY3NzI2MTIwMiwiZXhwIjoxNjc3MjkwMDAyfQ.Hz_cWN7HBALz9Btw7M6rxZvjkku8xwllZrRAgL1ZsmU
+GET http://localhost:3000/tasks
+Authorization: {{token}}
+
+###
+POST http://localhost:3000/tasks
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "title": "Task title 2",
+    "description": "Task description 2"
+}
+
+###
+POST http://localhost:3000/tasks/everyone
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "userIds": [1,2,3,4],
+    "title": "Task title from everyone.",
+    "description": "Task description everyone."
+}

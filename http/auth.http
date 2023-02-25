@@ -1,0 +1,19 @@
+POST http://localhost:3000/auth/sign-in
+Content-Type: application/json
+
+{
+    "credential": "Floriian",
+    "password": "asdasd123"
+}
+
+###
+
+POST http://localhost:3000/auth/sign-up
+Content-Type: application/json
+
+{
+    "username": "Floriian",
+    "email": "asdasd123@gmail.com",
+    "password": "asdasd123",
+    "confirm": "asdasd123"
+}
