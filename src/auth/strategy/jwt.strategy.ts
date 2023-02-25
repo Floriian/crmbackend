@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '../../user/entities/user.entity';
 import { Model } from 'mongoose';
+import { Role } from '../role.enum';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'JWT') {
   constructor(
@@ -17,10 +18,13 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'JWT') {
     });
   }
 
-  async validate(payload: { sub: string; username: string; email: string }) {
-    const user = await this.userModel.findOne({
-      id: payload.sub,
-    });
+  async validate(payload: {
+    sub: string;
+    username: string;
+    email: string;
+    role: Role[];
+  }) {
+    const user = await this.userModel.findById(payload.sub);
 
     if (user) {
       const userDeepClone: User = JSON.parse(JSON.stringify(user));
