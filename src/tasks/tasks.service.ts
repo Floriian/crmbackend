@@ -32,7 +32,6 @@ export class TasksService {
       completed: false,
       user: user,
     });
-    console.log(task);
     return task;
   }
 

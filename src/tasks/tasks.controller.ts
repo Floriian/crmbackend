@@ -14,7 +14,6 @@ export class TasksController {
   @Roles(Role.ADMIN, Role.CEO, Role.USER)
   @Get()
   getTasks(@GetUser() user: User) {
-    console.log(user);
     return this.tasksService.getTasks(user);
   }
 
