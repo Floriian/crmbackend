@@ -5,7 +5,9 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { TasksModule } from './tasks/tasks.module';
 import configYaml from './config/configuration';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -17,6 +19,7 @@ import configYaml from './config/configuration';
     ),
     AuthModule,
     UserModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
