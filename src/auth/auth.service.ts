@@ -12,7 +12,7 @@ import { Model } from 'mongoose';
 import * as argon2 from 'argon2';
 import { SignInDto, SignUpDto } from './dto';
 import { JwtService } from '@nestjs/jwt';
-import { Role } from '../user/role.enum';
+import { Role } from './role.enum';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +21,7 @@ export class AuthService {
     private jwt: JwtService,
     private config: ConfigService,
   ) {}
+
   async signUp(signUpDto: SignUpDto): Promise<{ access_token: string }> {
     const isPasswordValid =
       signUpDto.password === signUpDto.confirm ? true : false;
@@ -49,15 +50,12 @@ export class AuthService {
         username: signUpDto.username,
         email: signUpDto.email,
         password: hashPassword,
-        role: [Role.USER],
+        roles: [Role.USER],
       });
 
       await user.save();
 
-      // const userClone: User = JSON.parse(JSON.stringify(user));
-      // delete userClone.password;
-
-      return this.signToken(user.id, user.username, user.email);
+      return this.signToken(user.id, user.username, user.email, user.roles);
     } catch (e) {
       throw e;
     }
@@ -79,10 +77,7 @@ export class AuthService {
     const hashPassword = await argon2.verify(user.password, signInDto.password);
     if (!hashPassword) throw new UnauthorizedException('Incorrect password.');
 
-    // const userClone: User = JSON.parse(JSON.stringify(user));
-    // delete userClone.password;
-
-    return this.signToken(user.id, user.username, user.email);
+    return this.signToken(user.id, user.username, user.email, user.roles);
   }
 
   private async findUserByUsername(name: string): Promise<boolean> {
@@ -104,6 +99,7 @@ export class AuthService {
     id: string,
     username: string,
     email: string,
+    role: Role[],
   ): Promise<{ access_token: string }> {
     const secret = await this.config.get('auth.secret');
     const expiresIn = await this.config.get('auth.expiresIn');
@@ -112,6 +108,7 @@ export class AuthService {
       sub: id,
       username,
       email,
+      role,
     };
     const token = await this.jwt.signAsync(payload, {
       secret,
