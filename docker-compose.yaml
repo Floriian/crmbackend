@@ -3,7 +3,7 @@ version: "3.8"
 services:
   database:
     container_name: database
-    image: mongo
+    image: mongo:5.0.15
     restart: always
     ports:
       - 27017:27017
